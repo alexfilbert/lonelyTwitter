@@ -26,6 +26,14 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Represents a LonelyTwitterActivity object
+ *
+ * @author afilbert
+ * @version 1.0
+ * @see Activity
+ */
+
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "tweets.sav";
@@ -34,8 +42,15 @@ public class LonelyTwitterActivity extends Activity {
 
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
-	
+
 	/** Called when the activity is first created. */
+
+	/**
+	 * On creation perform various tasks
+	 *
+	 * @param savedInstanceState instance state of tweet
+	 */
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +63,12 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
+
+			/**
+			 * Add to tweetlist on click
+			 *
+			 * @param v view of tweet
+			 */
 
 			public void onClick(View v) {
 				setResult(RESULT_OK);
@@ -64,6 +85,12 @@ public class LonelyTwitterActivity extends Activity {
 
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
+			/**
+			 * Clear tweetlist on click
+			 *
+			 * @param v view of tweet
+			 */
+
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 
@@ -75,6 +102,10 @@ public class LonelyTwitterActivity extends Activity {
 			}
 		});
 	}
+
+	/**
+	 * Initialize adapter
+	 */
 
 	@Override
 	protected void onStart() {
@@ -90,6 +121,12 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 
 	}
+
+	/**
+	 * Load tweets from file
+	 *
+	 * @throws RuntimeException there was a problem reading the file
+	 */
 
 	private void loadFromFile() {
 
@@ -111,6 +148,12 @@ public class LonelyTwitterActivity extends Activity {
 		}
 
 	}
+
+	/**
+	 * Save tweets to file
+	 *
+	 * @throws RuntimeException there was a problem writing to the file
+	 */
 	
 	private void saveInFile() {
 		try {
@@ -131,6 +174,11 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
+
+	/**
+	 * Clean up deleted tweet
+	 *
+	 */
 
 	@Override
 	protected void onDestroy() {
